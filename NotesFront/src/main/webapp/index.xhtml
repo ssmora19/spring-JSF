@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+		crossorigin="anonymous" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="styles/styles.css" />
+	<title>Notas</title>
+</h:head>
+<h:body>
+	<div class="card card-custom" id="ptoolbar">
+		<p:toolbar styleClass="card-custom">
+			<p:toolbarGroup>
+				<h:panelGrid columns="1" cellpadding="10" styleClass="mb-3">
+					<p:commandButton tvalue="Create" type="button" value="New"
+					styleClass="ui-button-success" icon="pi pi-plus"
+					onclick="openCreatePopup()" />
+				</h:panelGrid>
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+						
+	</div>
+	
+	<div class="container">
+		<div class="popup" id="createpopup">		
+			<h:form id="createform">
+				<h2>Notas</h2>
+				<p:messages id="msgs" />
+
+				<h:panelGrid columns="3" cellpadding="7" styleClass="mb-3">
+				
+					<p:outputLabel for="nombre" value="Nombre:" />
+					<p:inputText value="#{AdminBean.nombre}" id="nombre" required="true"
+						label="nombre"  placeholder="Nombre completo">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="nombre" display="icon" />
+				
+					<p:outputLabel for="nota1" value="Nota 1:" />
+					<p:inputNumber value="#{AdminBean.nota1}" id="nota1" required="true"
+						label="nota1"  decimalPlaces="2" minValue="0" maxValue="5" placeholder="0,00">
+												
+						<f:validateLength minimum="2" />
+					</p:inputNumber>
+					<p:message for="nota1" display="icon" />
+
+					<p:outputLabel for="nota2" value="Nota 2:" />
+					<p:inputNumber value="#{AdminBean.nota2}" id="nota2" required="true"
+						label="nota2" decimalPlaces="2" minValue="0" maxValue="5" placeholder="0,00">
+						<f:validateLength minimum="2" />
+					</p:inputNumber>
+					<p:message for="nota2" display="icon" />
+
+					<p:outputLabel for="nota3" value="Nota 3:" />
+					<p:inputNumber value="#{AdminBean.nota3}" id="nota3" required="true"
+						label="nota3" decimalPlaces="2" minValue="0" maxValue="5" placeholder="0,00">
+						<f:validateLength minimum="2"  />
+					</p:inputNumber>
+					<p:message for="nota3" display="icon" />
+
+				</h:panelGrid>
+				<div class="row">
+					<div class="col-md-6">
+						<p:commandButton value="Agregar" type="submit"
+										icon="pi pi-check" styleClass="w-full ui-button-success"
+										update="createform" action="#{AdminBean.create}" />
+					</div>
+					<div class="col-md-6">
+						<p:commandButton value="Exit" styleClass="ui-button-help" icon="pi pi-sign-out"
+							onclick="closeCreatePopup()" />
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+	<div class="container my-4" id="divptable">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<h:dataTable id="tablePlanet" value="#{AdminBean.info}"
+						var="planet" styleClass="table table-striped-columns">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{AdminBean.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nombre</f:facet>
+							<h:outputText value="#{AdminBean.nombre}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nota 1</f:facet>
+							<h:outputText value="#{AdminBean.nota1}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nota 2</f:facet>
+							<h:outputText value="#{AdminBean.nota2}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nota 3</f:facet>
+							<h:outputText value="#{AdminBean.nota3}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Promedio</f:facet>
+							<h:outputText value="#{AdminBean.promedio}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Estado</f:facet>
+							<h:outputText value="#{AdminBean.aprovo}" />
+						</h:column>
+					</h:dataTable>
+				</div>
+			</div>
+		</div>
+	<script src="js/popup.js"></script>
+</h:body>
+</html>
